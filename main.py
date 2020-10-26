@@ -24,3 +24,5 @@ if __name__ == '__main__':
         except:
             print("Invalid configuration file")
     print("Finished router configuration\n")
+    while(True):
+        frameString = input("Enter incoming frame")
