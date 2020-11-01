@@ -17,7 +17,7 @@ class Router:
         # update routing table
         destinationAddr = interface.ipAddr
         CIDR = interface.CIDR
-        dest_entry = destinationAddr + '/' + str(CIDR)
+        dest_entry = destinationAddr + '/' + str(CIDR)  # @TODO: instead of the original ip, store only the network number e.g. instead of 192.168.3.1/24 we store 192.168.3.0/24
         nextHopMacAddr = 'FF:FF:FF:FF:FF:FF'
         nextHopInterface = interface.interfaceNum
         # example of an entry: {192.168.3.0/24: [1, FF:FF:FF:FF:FF:FF, 0]}

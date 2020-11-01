@@ -7,7 +7,7 @@
 #   - Payload
 
 class Frame:
-    def __init__(self, interfaceNum, srcMacAddr, destMacAddr, srcIpAddr, destIpAddr, protocolTag, payload):
+    def __init__(self, interfaceNum, srcMacAddr, destMacAddr, srcIpAddr, destIpAddr, protocolTag, payload=''):
         self.interfaceNum = interfaceNum
         self.srcMacAddr = srcMacAddr
         self.destMacAddr = destMacAddr
