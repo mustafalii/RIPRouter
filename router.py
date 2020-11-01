@@ -1,6 +1,5 @@
 # Class to define Router object
-# Router contains a count of interfaces and a list of interfaces
-
+# Router contains a count of interfaces, a list of interfaces, and a routing table
 from interface import Interface
 
 class Router:
@@ -8,7 +7,31 @@ class Router:
         self.nums = 0
         self.interfaceList = []
         
-    def addInterface(self, Interface):
-        self.interfaceList.append(Interface)
+        # routing table has a dictionary structure:
+        # { <ipaddr/cidr> : [<metric>, <nextHopAddr>, <nextHopInterface>] }
+        self.routing_table = {}
+
+    def addInterface(self, interface):
+        self.interfaceList.append(interface)
         self.nums += 1
-        
+        # update routing table
+        destinationAddr = interface.ipAddr
+        CIDR = interface.CIDR
+        dest_entry = destinationAddr + '/' + str(CIDR)
+        nextHopMacAddr = 'FF:FF:FF:FF:FF:FF'
+        nextHopInterface = interface.interfaceNum
+        # example of an entry: {192.168.3.0/24: [1, FF:FF:FF:FF:FF:FF, 0]}
+        self.routing_table[dest_entry] = [1, nextHopMacAddr, nextHopInterface]
+    
+    def updateRoutingTable(self, interface):
+        pass
+
+    def getMacAddrByInterfaceNum(self, interfaceNumber):
+        interface = self.interfaceList[int(interfaceNumber)]
+        return interface.macAddr
+
+    def getInterfaceByMacAddr(self, macAddr):
+        for interface in self.interfaceList:
+            if interface.macAddr == macAddr:
+                return interface
+        return None
